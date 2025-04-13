@@ -39,7 +39,6 @@
             this.picEmail = new System.Windows.Forms.PictureBox();
             this.btnEnviar = new System.Windows.Forms.Button();
             this.btnSair = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picEmail)).BeginInit();
@@ -47,7 +46,8 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(436, 13);
+            this.txtUsuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtUsuario.Location = new System.Drawing.Point(458, 77);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(209, 23);
             this.txtUsuario.TabIndex = 26;
@@ -57,7 +57,7 @@
             this.lblUsuario.AutoSize = true;
             this.lblUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblUsuario.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblUsuario.Location = new System.Drawing.Point(304, 12);
+            this.lblUsuario.Location = new System.Drawing.Point(326, 76);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(126, 20);
             this.lblUsuario.TabIndex = 25;
@@ -66,7 +66,7 @@
             // picUsuario
             // 
             this.picUsuario.Image = global::ListOfGame.Properties.Resources.contacts_24;
-            this.picUsuario.Location = new System.Drawing.Point(271, 12);
+            this.picUsuario.Location = new System.Drawing.Point(293, 76);
             this.picUsuario.Name = "picUsuario";
             this.picUsuario.Size = new System.Drawing.Size(27, 28);
             this.picUsuario.TabIndex = 24;
@@ -83,15 +83,20 @@
             // 
             // picLogo
             // 
+            this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picLogo.ErrorImage = null;
+            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
+            this.picLogo.InitialImage = null;
             this.picLogo.Location = new System.Drawing.Point(12, 12);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(253, 224);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picLogo.TabIndex = 30;
             this.picLogo.TabStop = false;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(436, 43);
+            this.txtEmail.Location = new System.Drawing.Point(458, 107);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(209, 23);
             this.txtEmail.TabIndex = 29;
@@ -101,7 +106,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEmail.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblEmail.Location = new System.Drawing.Point(304, 46);
+            this.lblEmail.Location = new System.Drawing.Point(326, 110);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(110, 20);
             this.lblEmail.TabIndex = 28;
@@ -109,8 +114,8 @@
             // 
             // picEmail
             // 
-            this.picEmail.Image = global::ListOfGame.Properties.Resources.contacts_24;
-            this.picEmail.Location = new System.Drawing.Point(271, 46);
+            this.picEmail.Image = ((System.Drawing.Image)(resources.GetObject("picEmail.Image")));
+            this.picEmail.Location = new System.Drawing.Point(293, 110);
             this.picEmail.Name = "picEmail";
             this.picEmail.Size = new System.Drawing.Size(27, 28);
             this.picEmail.TabIndex = 27;
@@ -119,7 +124,7 @@
             // btnEnviar
             // 
             this.btnEnviar.Image = global::ListOfGame.Properties.Resources.check_mark_8_24;
-            this.btnEnviar.Location = new System.Drawing.Point(372, 93);
+            this.btnEnviar.Location = new System.Drawing.Point(394, 157);
             this.btnEnviar.Name = "btnEnviar";
             this.btnEnviar.Size = new System.Drawing.Size(75, 39);
             this.btnEnviar.TabIndex = 32;
@@ -129,22 +134,12 @@
             // btnSair
             // 
             this.btnSair.Image = ((System.Drawing.Image)(resources.GetObject("btnSair.Image")));
-            this.btnSair.Location = new System.Drawing.Point(488, 93);
+            this.btnSair.Location = new System.Drawing.Point(510, 157);
             this.btnSair.Name = "btnSair";
             this.btnSair.Size = new System.Drawing.Size(75, 39);
             this.btnSair.TabIndex = 33;
             this.btnSair.UseVisualStyleBackColor = false;
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblStatus.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblStatus.Location = new System.Drawing.Point(288, 216);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 20);
-            this.lblStatus.TabIndex = 34;
             // 
             // frmEsqueciSenha
             // 
@@ -152,7 +147,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(679, 255);
-            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.btnEnviar);
             this.Controls.Add(this.btnConfirma);
@@ -187,6 +181,5 @@
         public System.Windows.Forms.PictureBox picEmail;
         public System.Windows.Forms.Button btnEnviar;
         public System.Windows.Forms.Button btnSair;
-        public System.Windows.Forms.Label lblStatus;
     }
 }

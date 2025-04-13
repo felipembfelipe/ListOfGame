@@ -27,7 +27,7 @@ namespace ListOfGame.View.Login
 
             if (!ValidarEmail(email))
             {
-                MostrarStatus("E-mail inválido. Verifique e tente novamente.", Color.Red);
+                MostrarMensagem("E-mail inválido. Verifique e tente novamente.", MessageBoxIcon.Error);
                 return;
             }
 
@@ -40,13 +40,16 @@ namespace ListOfGame.View.Login
                 var emailEnviado = await _usuarioServices.ObterUsuarioPorLoginEEmail(usuario, email);
 
                 if (emailEnviado)
-                    MostrarStatus("E-mail de recuperação enviado com sucesso!", Color.Green);
+                {
+                    MostrarMensagem("E-mail de recuperação enviado com sucesso!", MessageBoxIcon.Information);
+                    LimpaForm();
+                }
                 else
-                    MostrarStatus("E-mail não encontrado ou falha no envio.", Color.Red);
+                    MostrarMensagem("E-mail não encontrado ou falha no envio.", MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MostrarStatus("Erro ao tentar enviar o e-mail.", Color.Red);
+                MostrarMensagem("Erro ao tentar enviar o e-mail.", MessageBoxIcon.Error);
             }
             finally
             {
@@ -61,11 +64,16 @@ namespace ListOfGame.View.Login
                 RegexOptions.IgnoreCase);
         }
 
-        private void MostrarStatus(string mensagem, Color cor)
+        private void MostrarMensagem(string mensagem, MessageBoxIcon icone)
         {
-            lblStatus.Text = mensagem;
-            lblStatus.ForeColor = cor;
-            lblStatus.Visible = true;
+            MessageBox.Show(mensagem, "Mensagem do Sistema", MessageBoxButtons.OK, icone);
+        }
+
+        private void LimpaForm()
+        {
+            txtEmail.Text = "";
+            txtUsuario.Text = "";
+            txtUsuario.Focus();
         }
 
         private void btnSair_Click(object sender, EventArgs e)

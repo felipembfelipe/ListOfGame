@@ -18,12 +18,12 @@ namespace ListOfGame.Services
             try
             {
                 var mensagem = new MailMessage();
-                mensagem.From = new MailAddress(_emailOrigem, "Sistema de Login");
+                mensagem.From = new MailAddress(_emailOrigem, "Sistema de Login - Moretti Games");
                 mensagem.To.Add(destino);
-                mensagem.Subject = "Recuperação de Senha";
+                mensagem.Subject = "Recuperação de Senha - Moretti Games";
                 mensagem.Body = $"Olá!\n\nRecebemos uma solicitação para lembrar sua senha para o Lista de Games do Moretti.:\n\n" +
-                                $"Seu login é: " + usuario + "\n"+
-                                $"Sua senha é: " + senha + "\n"+
+                                $"Seu login é: " + usuario.ToUpper() + "\n"+
+                                $"Sua senha é: " + senha + "\n\n"+
                                 $"Se não foi você, ignore este e-mail.";
                 mensagem.IsBodyHtml = false;
 

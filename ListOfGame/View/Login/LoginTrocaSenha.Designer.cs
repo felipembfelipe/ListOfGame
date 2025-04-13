@@ -61,6 +61,7 @@
             // 
             // txtUsuario
             // 
+            this.txtUsuario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtUsuario.Location = new System.Drawing.Point(478, 14);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(134, 23);
@@ -108,9 +109,12 @@
             // 
             // picLogo
             // 
+            this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
             this.picLogo.Location = new System.Drawing.Point(12, 12);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(253, 224);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picLogo.TabIndex = 13;
             this.picLogo.TabStop = false;
             // 
@@ -190,6 +194,7 @@
             // 
             // btnLimpar
             // 
+            this.btnLimpar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnLimpar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpar.Image")));
             this.btnLimpar.Location = new System.Drawing.Point(436, 197);
             this.btnLimpar.Name = "btnLimpar";

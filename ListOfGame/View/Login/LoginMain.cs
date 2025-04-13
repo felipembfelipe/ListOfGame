@@ -16,7 +16,6 @@ namespace ListOfGame.View
     {
         private readonly IUsuarioServices _usuarioServices;
 
-        bool logado = false;
         DateTime data_hora;
 
         public frmLogin(IUsuarioServices usuarioServices)
@@ -30,11 +29,6 @@ namespace ListOfGame.View
 
         }
 
-        private void txtSenha_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void linkEsqueci_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var esqueceu = new frmEsqueciSenha(_usuarioServices);
@@ -43,9 +37,12 @@ namespace ListOfGame.View
 
         private void linkTrocar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            frmTrocaSenha trocaSenha = new frmTrocaSenha(_usuarioServices);
-            this.Visible = false;
-            trocaSenha.Visible = true;
+            //frmTrocaSenha trocaSenha = new frmTrocaSenha(_usuarioServices);
+            //this.Visible = false;
+            //trocaSenha.Visible = true;
+
+            var trocaSenha = new frmTrocaSenha(_usuarioServices);
+            trocaSenha.ShowDialog();
         }
 
         private async void txtSenha_KeyDown(object sender, KeyEventArgs e)
@@ -57,6 +54,15 @@ namespace ListOfGame.View
                 if (autenticado)
                     AbrirTelaPrincipal();
             }
+        }
+
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtSenha.Focus();
+            }
+            
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -86,7 +92,7 @@ namespace ListOfGame.View
         private void AbrirTelaPrincipal()
         {
             this.Hide(); // Oculta o login atual
-            var telaPrincipal = new frmTelaPrincipal();
+            var telaPrincipal = new frmTelaPrincipal(_usuarioServices);
             telaPrincipal.FormClosed += (s, e) => this.Close(); // Fecha login ao fechar principal
             telaPrincipal.Show();
         }
