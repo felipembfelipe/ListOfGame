@@ -13,18 +13,18 @@ namespace ListOfGame.View.Login
 {
     public partial class frmTrocaSenha : Form
     {
-        private readonly ILoginServices _loginServices;
+        private readonly IUsuarioServices _usuarioServices;
 
-        public frmTrocaSenha(ILoginServices loginServices)
+        public frmTrocaSenha(IUsuarioServices usuarioServices)
         {
-            _loginServices = loginServices;
+            _usuarioServices = usuarioServices;
             InitializeComponent();
         }
 
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            frmLogin formLogin = new frmLogin(_loginServices);
+            frmLogin formLogin = new frmLogin(_usuarioServices);
             formLogin.ShowDialog();
         }
 
@@ -79,11 +79,11 @@ namespace ListOfGame.View.Login
 
                 try
                 {
-                    var usuario = await _loginServices.Login(usuarioLogin, senhaAntiga);
+                    var usuario = await _usuarioServices.ObterUsuarioPorLoginESenha(usuarioLogin, senhaAntiga);
 
                     if (usuario == null)
                     {
-                        usuario = await _loginServices.ValidaUsuarioExistente(usuarioLogin);
+                        usuario = await _usuarioServices.ObterUsuarioPorLogin(usuarioLogin);
                         MostrarMensagem(
                             usuario == null ? "Usuário inexistente!" : "Usuário e/ou senha incorreto",
                             MessageBoxIcon.Error);
@@ -97,7 +97,7 @@ namespace ListOfGame.View.Login
                     }
 
                     usuario.SenhaUsuario = senhaNova;
-                    bool sucesso = await _loginServices.TrocaSenha(usuario);
+                    bool sucesso = await _usuarioServices.TrocaSenha(usuario);
 
                     MostrarMensagem(
                         sucesso ? "Senha alterada com sucesso!" : "Erro ao alterar a senha.",

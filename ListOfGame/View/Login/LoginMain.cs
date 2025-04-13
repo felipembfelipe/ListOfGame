@@ -7,20 +7,21 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ListOfGame.View
 {
     public partial class frmLogin : Form
     {
-        private readonly ILoginServices _loginServices;
+        private readonly IUsuarioServices _usuarioServices;
 
         bool logado = false;
         DateTime data_hora;
 
-        public frmLogin(ILoginServices loginServices)
+        public frmLogin(IUsuarioServices usuarioServices)
         {
-            _loginServices = loginServices;
+            _usuarioServices = usuarioServices;
             InitializeComponent();
         }
 
@@ -36,23 +37,34 @@ namespace ListOfGame.View
 
         private void linkEsqueci_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //SenhaPergunta1 se = new SenhaPergunta1();
-            //se.ShowDialog();
+            var esqueceu = new frmEsqueciSenha(_usuarioServices);
+            esqueceu.ShowDialog();
         }
 
         private void linkTrocar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //trocaSenha.ShowDialog();
-
-            frmTrocaSenha trocaSenha = new frmTrocaSenha(_loginServices);
+            frmTrocaSenha trocaSenha = new frmTrocaSenha(_usuarioServices);
             this.Visible = false;
             trocaSenha.Visible = true;
-            //novoLogin.Close();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void txtSenha_KeyDown(object sender, KeyEventArgs e)
         {
-            Autenticacao();
+            if (e.KeyCode == Keys.Enter)
+            {
+                bool autenticado = await AutenticacaoAsync();
+
+                if (autenticado)
+                    AbrirTelaPrincipal();
+            }
+        }
+
+        private async void btnLogin_Click(object sender, EventArgs e)
+        {
+            bool autenticado = await AutenticacaoAsync();
+
+            if (autenticado)
+                AbrirTelaPrincipal();
         }
 
         private void btnSair_Click(object sender, EventArgs e)
@@ -71,14 +83,6 @@ namespace ListOfGame.View
             lblHoraAgora.Text = data_hora.ToLongTimeString();
         }
 
-        private void txtSenha_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Autenticacao();
-            }
-        }
-
         private void AbrirTelaPrincipal()
         {
             this.Hide(); // Oculta o login atual
@@ -92,19 +96,15 @@ namespace ListOfGame.View
             MessageBox.Show(texto, "Mensagem do Sistema", MessageBoxButtons.OK, icone);
         }
 
-        public async void Autenticacao()
+        public async Task<bool> AutenticacaoAsync()
         {
-            //frmTelaPrincipal telaPrincipal = new frmTelaPrincipal();
-            //frmLogin novoLogin = new frmLogin(_loginServices);
-
             string login = txtUsuario.Text;
             string senha = txtSenha.Text;
 
             if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(senha))
             {
                 MostrarMensagem("Preencha os campos vazios!", MessageBoxIcon.Exclamation);
-                logado = false;
-                return;
+                return false;
             }
 
             using (var loading = new frmLoading())
@@ -114,38 +114,34 @@ namespace ListOfGame.View
 
                 try
                 {
-                    var usuario = await _loginServices.Login(login, senha);
+                    var usuario = await _usuarioServices.ObterUsuarioPorLoginESenha(login, senha);
 
                     if (usuario == null)
                     {
-                        usuario = await _loginServices.ValidaUsuarioExistente(login);
+                        usuario = await _usuarioServices.ObterUsuarioPorLogin(login);
 
                         MostrarMensagem(
                             usuario == null ? "Usuário inexistente!" : "Usuário e/ou senha incorreto",
                             MessageBoxIcon.Error
                         );
 
-                        logado = false;
-                        return;
+                        return false;
                     }
 
                     if (!usuario.Ativo)
                     {
                         MostrarMensagem("Usuário desativado. Contate o Administrador.", MessageBoxIcon.Error);
-                        logado = false;
-                        return;
+                        return false;
                     }
-
-                    logado = true;
 
                     MostrarMensagem("Logado com Sucesso", MessageBoxIcon.Information);
 
-                    AbrirTelaPrincipal(); // Separado para organização
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     MostrarMensagem($"Erro inesperado: {ex.Message}", MessageBoxIcon.Error);
-                    logado = false;
+                    return false;
                 }
                 finally
                 {

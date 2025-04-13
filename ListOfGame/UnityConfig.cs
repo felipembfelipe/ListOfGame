@@ -21,8 +21,8 @@ namespace ListOfGame
             container.RegisterType<frmLogin>();
 
             // Registrar as dependências no Unity Container
-            container.RegisterType<ILoginServices, LoginServices>();
             container.RegisterType<IUsuarioServices, UsuarioServices>();
+            container.RegisterType<IEmailService, EmailService>();
 
             // Registrar outros repositorios
             container.RegisterType<IUsuarioRepositorio, UsuarioRepositorio>();

@@ -4,6 +4,9 @@
     <Compile Update="View\FormLoading.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="View\Login\LoginEsqueciSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="View\Login\LoginMain.cs">
       <SubType>Form</SubType>
     </Compile>

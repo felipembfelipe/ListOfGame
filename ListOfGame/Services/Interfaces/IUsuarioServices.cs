@@ -10,5 +10,7 @@ namespace ListOfGame.Services.Interfaces
         Task<Usuario> ObterUsuarioPorLogin(string login);
 
         Task<bool> TrocaSenha(Usuario usuario);
+
+        Task<bool> ObterUsuarioPorLoginEEmail(string usuario, string email);
     }
 }

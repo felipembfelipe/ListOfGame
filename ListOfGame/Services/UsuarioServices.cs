@@ -10,11 +10,13 @@ namespace ListOfGame.Services
 {
     public class UsuarioServices : IUsuarioServices
     {
+        private readonly IEmailService _emailService;
         private readonly IUsuarioRepositorio _usuarioRepositorio;
 
-        public UsuarioServices(IUsuarioRepositorio usuarioRepositorio)
+        public UsuarioServices(IUsuarioRepositorio usuarioRepositorio, IEmailService emailService)
         {
             _usuarioRepositorio = usuarioRepositorio;
+            _emailService = emailService;
         }
 
         public async Task<Usuario> ObterUsuarioPorLoginESenha(string login, string senha)
@@ -33,6 +35,17 @@ namespace ListOfGame.Services
         {
             var user = await _usuarioRepositorio.SalvarAlteracoes(usuario);
             return user;
+        }
+
+        public async Task<bool> ObterUsuarioPorLoginEEmail(string usuario, string email)
+        {
+            var emailExiste = await _usuarioRepositorio.RetornaUsuarioPorEmailELogin(usuario, email);
+
+            if (emailExiste == null)
+                return false;
+
+            return await _emailService.EnviarEmailRecuperacao(email, usuario, emailExiste.SenhaUsuario);
+
         }
     }
 }

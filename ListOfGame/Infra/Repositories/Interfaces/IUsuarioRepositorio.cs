@@ -10,5 +10,7 @@ namespace ListOfGame.Infra.Repositories.Interfaces
 
         Task<Usuario> RetornaUsuarioPorLogin(string login);
 
+        Task<Usuario> RetornaUsuarioPorEmailELogin(string usuario, string email);
+
     }
 }
