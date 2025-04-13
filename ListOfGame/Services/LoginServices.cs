@@ -52,5 +52,19 @@ namespace ListOfGame.Services
             }
             return usuario;
         }
+
+        public async Task<bool> TrocaSenha(Usuario usuario)
+        {
+            bool sucesso = false;
+            try
+            {
+               sucesso = await _usuarioService.TrocaSenha(usuario);
+            }
+            catch (SqlException erro)
+            {
+                MessageBox.Show(erro + "No Banco");
+            }
+            return sucesso;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ListOfGame.Models;
 using ListOfGame.Services.Interfaces;
+using ListOfGame.View.Login;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,8 +42,12 @@ namespace ListOfGame.View
 
         private void linkTrocar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //SenhaNova sn = new SenhaNova();
-            //sn.ShowDialog();
+            //trocaSenha.ShowDialog();
+
+            frmTrocaSenha trocaSenha = new frmTrocaSenha(_loginServices);
+            this.Visible = false;
+            trocaSenha.Visible = true;
+            //novoLogin.Close();
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -74,49 +79,77 @@ namespace ListOfGame.View
             }
         }
 
+        private void AbrirTelaPrincipal()
+        {
+            this.Hide(); // Oculta o login atual
+            var telaPrincipal = new frmTelaPrincipal();
+            telaPrincipal.FormClosed += (s, e) => this.Close(); // Fecha login ao fechar principal
+            telaPrincipal.Show();
+        }
+
+        private void MostrarMensagem(string texto, MessageBoxIcon icone)
+        {
+            MessageBox.Show(texto, "Mensagem do Sistema", MessageBoxButtons.OK, icone);
+        }
+
         public async void Autenticacao()
         {
-            frmTelaPrincipal telaPrincipal = new frmTelaPrincipal();
-            frmLogin novoLogin = new frmLogin(_loginServices);
+            //frmTelaPrincipal telaPrincipal = new frmTelaPrincipal();
+            //frmLogin novoLogin = new frmLogin(_loginServices);
 
             string login = txtUsuario.Text;
             string senha = txtSenha.Text;
 
-            if (txtUsuario.Text == "" || txtSenha.Text == "")
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(senha))
             {
-                MessageBox.Show("Preencha os campos vazios!", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MostrarMensagem("Preencha os campos vazios!", MessageBoxIcon.Exclamation);
+                logado = false;
+                return;
             }
-            else
-            {
-                // Chama o método Login do serviço injetado
-                Usuario usuario = await _loginServices.Login(login, senha);
 
-                // Valida autenticação
-                if (usuario == null)
+            using (var loading = new frmLoading())
+            {
+                loading.Show();
+                loading.Refresh();
+
+                try
                 {
-                    usuario = await _loginServices.ValidaUsuarioExistente(login);
-                    if(usuario == null)
+                    var usuario = await _loginServices.Login(login, senha);
+
+                    if (usuario == null)
                     {
-                        MessageBox.Show("Usuário inexistente!", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        usuario = await _loginServices.ValidaUsuarioExistente(login);
+
+                        MostrarMensagem(
+                            usuario == null ? "Usuário inexistente!" : "Usuário e/ou senha incorreto",
+                            MessageBoxIcon.Error
+                        );
+
                         logado = false;
+                        return;
                     }
-                    else
+
+                    if (!usuario.Ativo)
                     {
-                        MessageBox.Show("Usuário e/ou senha incorreto", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MostrarMensagem("Usuário desativado. Contate o Administrador.", MessageBoxIcon.Error);
                         logado = false;
+                        return;
                     }
+
+                    logado = true;
+
+                    MostrarMensagem("Logado com Sucesso", MessageBoxIcon.Information);
+
+                    AbrirTelaPrincipal(); // Separado para organização
                 }
-                else if(usuario.Ativo == false)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Usuário Desativado!\nPor favor entre em contato com o Administrador!", "Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MostrarMensagem($"Erro inesperado: {ex.Message}", MessageBoxIcon.Error);
                     logado = false;
                 }
-                else
+                finally
                 {
-                    this.Visible = false;
-                    MessageBox.Show("Logado com Sucesso","Mensagem do Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    telaPrincipal.Visible = true;
-                    novoLogin.Close();
+                    loading.Close();
                 }
             }
         }

@@ -11,5 +11,7 @@ namespace ListOfGame.Services.Interfaces
         Task<Usuario> Login(string login, string senha);
 
         Task<Usuario> ValidaUsuarioExistente(string login);
+
+        Task<bool> TrocaSenha(Usuario usuario);
     }
 }

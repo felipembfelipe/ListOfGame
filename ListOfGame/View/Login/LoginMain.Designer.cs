@@ -53,6 +53,7 @@
             // 
             // picLogo
             // 
+            this.picLogo.InitialImage = null;
             this.picLogo.Location = new System.Drawing.Point(12, 12);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(253, 224);
@@ -192,17 +193,16 @@
             // lblHoraAgora
             // 
             this.lblHoraAgora.AutoSize = true;
-            this.lblHoraAgora.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHoraAgora.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblHoraAgora.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblHoraAgora.Location = new System.Drawing.Point(322, 213);
             this.lblHoraAgora.Name = "lblHoraAgora";
-            this.lblHoraAgora.Size = new System.Drawing.Size(0, 15);
+            this.lblHoraAgora.Size = new System.Drawing.Size(0, 13);
             this.lblHoraAgora.TabIndex = 13;
             // 
             // lblDataAgora
             // 
             this.lblDataAgora.AutoSize = true;
-            this.lblHoraAgora.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDataAgora.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblDataAgora.Location = new System.Drawing.Point(322, 236);
             this.lblDataAgora.Name = "lblDataAgora";

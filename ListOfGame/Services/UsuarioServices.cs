@@ -28,5 +28,11 @@ namespace ListOfGame.Services
             var user = await _usuarioRepositorio.RetornaUsuarioPorLogin(login);
             return user;
         }
+
+        public async Task<bool> TrocaSenha(Usuario usuario)
+        {
+            var user = await _usuarioRepositorio.SalvarAlteracoes(usuario);
+            return user;
+        }
     }
 }
