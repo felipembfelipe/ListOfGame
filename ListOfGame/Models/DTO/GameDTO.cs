@@ -8,5 +8,6 @@
         public bool PossuiOnline { get; set; }
         public int IdStatusGame { get; set; }
         public int? AnoConcluido { get; set; }
+        public bool GameConcluido { get; set; }
     }
 }

@@ -29,6 +29,9 @@ namespace ListOfGame.Models
         [Column("VL_ANO_CONCLUIDO")]
         public int? AnoConcluido { get; set; }
 
+        [Column("FLG_GAME_CONCLUIDO")]
+        public bool GameConcluido { get; set; }
+
         [ForeignKey("IdStatusGame")]
         public TipoStatusGame TipoStatusGame { get; set; }
 

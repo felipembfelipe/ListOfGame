@@ -35,5 +35,12 @@ namespace ListOfGame.View
             frmLogin formLogin = new frmLogin(_usuarioServices);
             formLogin.ShowDialog();
         }
+
+        private void btnGame_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            frmTelaGame formGame = new frmTelaGame(_usuarioServices);
+            formGame.ShowDialog();
+        }
     }
 }
