@@ -9,13 +9,15 @@ namespace ListOfGame.View
     public partial class frmLogin : Form
     {
         private readonly IUsuarioServices _usuarioServices;
+        private readonly IGameServices _gameServices;
 
         DateTime data_hora;
 
-        public frmLogin(IUsuarioServices usuarioServices)
+        public frmLogin(IUsuarioServices usuarioServices, IGameServices gameServices)
         {
-            _usuarioServices = usuarioServices;
             InitializeComponent();
+            _usuarioServices = usuarioServices;
+            _gameServices = gameServices;
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
@@ -25,13 +27,13 @@ namespace ListOfGame.View
 
         private void linkEsqueci_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var esqueceu = new frmEsqueciSenha(_usuarioServices);
+            var esqueceu = new frmEsqueciSenha(_usuarioServices, _gameServices);
             esqueceu.ShowDialog();
         }
 
         private void linkTrocar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var trocaSenha = new frmTrocaSenha(_usuarioServices);
+            var trocaSenha = new frmTrocaSenha(_usuarioServices, _gameServices);
             trocaSenha.ShowDialog();
         }
 
@@ -82,7 +84,7 @@ namespace ListOfGame.View
         private void AbrirTelaPrincipal()
         {
             this.Hide(); // Oculta o login atual
-            var telaPrincipal = new frmTelaPrincipal(_usuarioServices);
+            var telaPrincipal = new frmTelaPrincipal(_usuarioServices, _gameServices);
             telaPrincipal.FormClosed += (s, e) => this.Close(); // Fecha login ao fechar principal
             telaPrincipal.Show();
         }

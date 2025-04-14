@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ListOfGame.Enum;
+using ListOfGame.View.Utils;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,6 +36,10 @@ namespace ListOfGame.Models
 
         [ForeignKey("IdStatusGame")]
         public TipoStatusGame TipoStatusGame { get; set; }
+
+        // Propriedade só pra exibição no DataGridView
+        [NotMapped]
+        public string StatusPlatinaDescricao => EnumUtils.GetEnumDescription((ETipoStatusGame)IdStatusGame);
 
     }
 }

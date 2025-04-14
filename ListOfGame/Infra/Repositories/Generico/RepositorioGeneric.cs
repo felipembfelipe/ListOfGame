@@ -78,15 +78,5 @@ namespace ListOfGame.Infra.Repositories.Generico
                 }
             }
         }
-
-        public void Alterar(TEntity model)
-        {
-            _mdContext.Entry(model).State = EntityState.Modified;
-        }
-
-        public void Cadastrar(params TEntity[] models)
-        {
-            _mdContext.Set<TEntity>().AddRange(models);
-        }
     }
 }

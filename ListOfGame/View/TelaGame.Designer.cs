@@ -38,7 +38,7 @@
             this.lblAno = new System.Windows.Forms.Label();
             this.txtAno = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxStatus = new System.Windows.Forms.ComboBox();
             this.lblConcluido = new System.Windows.Forms.Label();
             this.checkConcluido = new System.Windows.Forms.CheckBox();
             this.btnSalvar = new System.Windows.Forms.Button();
@@ -62,13 +62,13 @@
             this.btnNovo.Text = "Novo";
             this.btnNovo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNovo.UseVisualStyleBackColor = false;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // txtNomeDoGame
             // 
-            this.txtNomeDoGame.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNomeDoGame.Location = new System.Drawing.Point(143, 32);
             this.txtNomeDoGame.Name = "txtNomeDoGame";
-            this.txtNomeDoGame.Size = new System.Drawing.Size(594, 23);
+            this.txtNomeDoGame.Size = new System.Drawing.Size(775, 23);
             this.txtNomeDoGame.TabIndex = 11;
             // 
             // lblNomeGame
@@ -100,13 +100,14 @@
             this.txtTempo.Name = "txtTempo";
             this.txtTempo.Size = new System.Drawing.Size(69, 23);
             this.txtTempo.TabIndex = 14;
+            this.txtTempo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTempo_KeyPress);
             // 
             // lblOnline
             // 
             this.lblOnline.AutoSize = true;
             this.lblOnline.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblOnline.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblOnline.Location = new System.Drawing.Point(566, 129);
+            this.lblOnline.Location = new System.Drawing.Point(747, 120);
             this.lblOnline.Name = "lblOnline";
             this.lblOnline.Size = new System.Drawing.Size(109, 20);
             this.lblOnline.TabIndex = 15;
@@ -118,7 +119,7 @@
             this.checkOnline.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.checkOnline.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkOnline.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.checkOnline.Location = new System.Drawing.Point(681, 127);
+            this.checkOnline.Location = new System.Drawing.Point(862, 118);
             this.checkOnline.Name = "checkOnline";
             this.checkOnline.Size = new System.Drawing.Size(56, 25);
             this.checkOnline.TabIndex = 16;
@@ -130,7 +131,7 @@
             this.lblAno.AutoSize = true;
             this.lblAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblAno.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblAno.Location = new System.Drawing.Point(522, 86);
+            this.lblAno.Location = new System.Drawing.Point(705, 77);
             this.lblAno.Name = "lblAno";
             this.lblAno.Size = new System.Drawing.Size(143, 20);
             this.lblAno.TabIndex = 17;
@@ -139,10 +140,11 @@
             // txtAno
             // 
             this.txtAno.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtAno.Location = new System.Drawing.Point(671, 83);
+            this.txtAno.Location = new System.Drawing.Point(854, 74);
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(64, 23);
             this.txtAno.TabIndex = 18;
+            this.txtAno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAno_KeyPress);
             // 
             // label1
             // 
@@ -155,20 +157,20 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Status do Andamento da Platina:";
             // 
-            // comboBox1
+            // comboBoxStatus
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(261, 130);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(297, 23);
-            this.comboBox1.TabIndex = 20;
+            this.comboBoxStatus.FormattingEnabled = true;
+            this.comboBoxStatus.Location = new System.Drawing.Point(261, 130);
+            this.comboBoxStatus.Name = "comboBoxStatus";
+            this.comboBoxStatus.Size = new System.Drawing.Size(297, 23);
+            this.comboBoxStatus.TabIndex = 20;
             // 
             // lblConcluido
             // 
             this.lblConcluido.AutoSize = true;
             this.lblConcluido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblConcluido.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblConcluido.Location = new System.Drawing.Point(342, 86);
+            this.lblConcluido.Location = new System.Drawing.Point(463, 83);
             this.lblConcluido.Name = "lblConcluido";
             this.lblConcluido.Size = new System.Drawing.Size(87, 20);
             this.lblConcluido.TabIndex = 21;
@@ -180,7 +182,7 @@
             this.checkConcluido.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.checkConcluido.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkConcluido.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.checkConcluido.Location = new System.Drawing.Point(435, 84);
+            this.checkConcluido.Location = new System.Drawing.Point(556, 81);
             this.checkConcluido.Name = "checkConcluido";
             this.checkConcluido.Size = new System.Drawing.Size(56, 25);
             this.checkConcluido.TabIndex = 22;
@@ -200,6 +202,7 @@
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSalvar.UseVisualStyleBackColor = false;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // btnEditar
             // 
@@ -214,6 +217,7 @@
             this.btnEditar.Text = "Editar";
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnExcluir
             // 
@@ -228,6 +232,7 @@
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExcluir.UseVisualStyleBackColor = false;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnSair
             // 
@@ -235,7 +240,7 @@
             this.btnSair.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSair.Image = global::ListOfGame.Properties.Resources.check_mark_8_24;
             this.btnSair.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSair.Location = new System.Drawing.Point(641, 180);
+            this.btnSair.Location = new System.Drawing.Point(1103, 190);
             this.btnSair.Name = "btnSair";
             this.btnSair.Size = new System.Drawing.Size(94, 39);
             this.btnSair.TabIndex = 26;
@@ -250,15 +255,17 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 252);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(723, 366);
+            this.dataGridView1.Size = new System.Drawing.Size(1185, 366);
             this.dataGridView1.TabIndex = 27;
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             // 
             // frmTelaGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(749, 640);
+            this.ClientSize = new System.Drawing.Size(1209, 640);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnSair);
             this.Controls.Add(this.btnExcluir);
@@ -266,7 +273,7 @@
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.checkConcluido);
             this.Controls.Add(this.lblConcluido);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBoxStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtAno);
             this.Controls.Add(this.lblAno);
@@ -281,6 +288,7 @@
             this.Name = "frmTelaGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tela do Game";
+            this.Load += new System.EventHandler(this.frmTelaGame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -299,7 +307,7 @@
         public System.Windows.Forms.Label lblAno;
         public System.Windows.Forms.TextBox txtAno;
         public System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxStatus;
         public System.Windows.Forms.Label lblConcluido;
         private System.Windows.Forms.CheckBox checkConcluido;
         public System.Windows.Forms.Button btnSalvar;

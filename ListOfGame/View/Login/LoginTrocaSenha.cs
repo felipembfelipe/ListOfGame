@@ -14,17 +14,19 @@ namespace ListOfGame.View.Login
     public partial class frmTrocaSenha : Form
     {
         private readonly IUsuarioServices _usuarioServices;
+        private readonly IGameServices _gameServices;
 
-        public frmTrocaSenha(IUsuarioServices usuarioServices)
+        public frmTrocaSenha(IUsuarioServices usuarioServices, IGameServices gameServices)
         {
-            _usuarioServices = usuarioServices;
             InitializeComponent();
+            _usuarioServices = usuarioServices;
+            _gameServices = gameServices;
         }
 
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            frmLogin formLogin = new frmLogin(_usuarioServices);
+            frmLogin formLogin = new frmLogin(_usuarioServices, _gameServices);
             formLogin.ShowDialog();
         }
 

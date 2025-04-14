@@ -6,9 +6,6 @@ namespace ListOfGame.Infra.Repositories.Generico
     {
         Task<bool> GravarObjeto(TEntity obj);
         Task<bool> SalvarAlteracoes(TEntity obj);
-        void Cadastrar(params TEntity[] models);
-        void Alterar(TEntity model);
-
         Task<bool> AtualizarObjetoTracking(TEntity obj);
 
     }

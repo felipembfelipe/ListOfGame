@@ -13,11 +13,13 @@ namespace ListOfGame.View.Login
     public partial class frmEsqueciSenha : Form
     {
         private readonly IUsuarioServices _usuarioServices;
+        private readonly IGameServices _gameServices;
 
-        public frmEsqueciSenha(IUsuarioServices usuarioServices)
+        public frmEsqueciSenha(IUsuarioServices usuarioServices, IGameServices gameServices)
         {
-            _usuarioServices = usuarioServices;
             InitializeComponent();
+            _usuarioServices = usuarioServices;
+            _gameServices = gameServices;
         }
 
         private async void btnEnviar_Click(object sender, EventArgs e)
@@ -79,7 +81,7 @@ namespace ListOfGame.View.Login
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            frmLogin formLogin = new frmLogin(_usuarioServices);
+            frmLogin formLogin = new frmLogin(_usuarioServices, _gameServices);
             formLogin.ShowDialog();
         }
     }

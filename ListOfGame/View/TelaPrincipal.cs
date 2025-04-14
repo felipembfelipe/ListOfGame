@@ -13,10 +13,12 @@ namespace ListOfGame.View
     public partial class frmTelaPrincipal : Form
     {
         private readonly IUsuarioServices _usuarioServices;
+        private readonly IGameServices _gameServices;
 
-        public frmTelaPrincipal(IUsuarioServices usuarioServices)
+        public frmTelaPrincipal(IUsuarioServices usuarioServices, IGameServices gameServices)
         {
             _usuarioServices = usuarioServices;
+            _gameServices = gameServices;
             InitializeComponent();
         }
 
@@ -32,14 +34,14 @@ namespace ListOfGame.View
         private void btnVoltar_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            frmLogin formLogin = new frmLogin(_usuarioServices);
+            frmLogin formLogin = new frmLogin(_usuarioServices, _gameServices);
             formLogin.ShowDialog();
         }
 
         private void btnGame_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            frmTelaGame formGame = new frmTelaGame(_usuarioServices);
+            frmTelaGame formGame = new frmTelaGame(_usuarioServices, _gameServices);
             formGame.ShowDialog();
         }
     }
