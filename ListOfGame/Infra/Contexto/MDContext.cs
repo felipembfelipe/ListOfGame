@@ -11,7 +11,9 @@ namespace ListOfGame.Infra.Contexto
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<TipoUsuario> TipoUsuarios { get; set; }
+        public DbSet<Game> Games { get; set; }
 
+        public DbSet<TipoUsuario> TipoUsuarios { get; set; }
+        public DbSet<TipoStatusGame> TipoStatusGames { get; set; }
     }
 }
