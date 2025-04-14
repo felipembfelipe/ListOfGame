@@ -11,5 +11,6 @@ namespace ListOfGame.Models.DTO
         public DateTime DataAlteracao { get; set; }
         public bool Ativo { get; set; }
         public string EmailLogin { get; set; }
+        public int IdTipoUsuario { get; set; }
     }
 }

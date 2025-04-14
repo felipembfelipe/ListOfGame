@@ -32,6 +32,10 @@ namespace ListOfGame.Models
         [Column("DS_EMAIL")]
         public string? EmailLogin { get; set; }
 
+        [Column("ID_TIPO_USUARIO")]
+        public int IdTipoUsuario { get; set; }
 
+        [ForeignKey("IdTipoUsuario")]
+        public TipoUsuario TipoUsuario { get; set; }
     }
 }

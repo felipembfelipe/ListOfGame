@@ -9,6 +9,7 @@ namespace ListOfGame.Infra.AutoMapper
         public MappingProfile()
         {
             CreateMap<Usuario, UsuarioDTO>().ReverseMap();
+            CreateMap<TipoUsuario, TipoUsuarioDTO>().ReverseMap();
         }
     }
 }

@@ -1,12 +1,6 @@
-﻿using ListOfGame.Models;
-using ListOfGame.Services.Interfaces;
+﻿using ListOfGame.Services.Interfaces;
 using ListOfGame.View.Login;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,10 +31,6 @@ namespace ListOfGame.View
 
         private void linkTrocar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //frmTrocaSenha trocaSenha = new frmTrocaSenha(_usuarioServices);
-            //this.Visible = false;
-            //trocaSenha.Visible = true;
-
             var trocaSenha = new frmTrocaSenha(_usuarioServices);
             trocaSenha.ShowDialog();
         }
