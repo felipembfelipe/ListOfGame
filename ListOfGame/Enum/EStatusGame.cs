@@ -2,7 +2,7 @@
 
 namespace ListOfGame.Enum
 {
-    public enum ETipoStatusGame
+    public enum EStatusGame
     {
         [Description("Concluído")]
         CONCLUIDO = 1,

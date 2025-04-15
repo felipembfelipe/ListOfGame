@@ -7,7 +7,6 @@ using ListOfGame.Services;
 using ListOfGame.Infra.Repositories.Interfaces;
 using ListOfGame.Infra.Repositories;
 using ListOfGame.Infra.AutoMapper;
-using ListOfGame.View.Login;
 
 namespace ListOfGame
 {
@@ -19,20 +18,12 @@ namespace ListOfGame
 
             // Registrar os forms
             container.RegisterType<MDContext>();
-            container.RegisterType<frmLogin>();
-            container.RegisterType<frmTrocaSenha>();
-            container.RegisterType<frmEsqueciSenha>();
-            container.RegisterType<frmLoading>();
-            container.RegisterType<frmTelaPrincipal>();
             container.RegisterType<frmTelaGame>();
 
             // Registrar as dependências no Unity Container
-            container.RegisterType<IUsuarioServices, UsuarioServices>();
-            container.RegisterType<IEmailService, EmailService>();
             container.RegisterType<IGameServices, GameServices>();
 
             // Registrar outros repositorios
-            container.RegisterType<IUsuarioRepositorio, UsuarioRepositorio>();
             container.RegisterType<IGameRepositorio, GameRepositorio>();
 
             // Registrar o perfil do AutoMapper e criar uma instância de IMapper

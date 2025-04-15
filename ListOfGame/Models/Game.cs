@@ -34,12 +34,13 @@ namespace ListOfGame.Models
         [Column("FLG_GAME_CONCLUIDO")]
         public bool GameConcluido { get; set; }
 
+
         [ForeignKey("IdStatusGame")]
-        public TipoStatusGame TipoStatusGame { get; set; }
+        public StatusGame StatusGame { get; set; }
 
         // Propriedade só pra exibição no DataGridView
         [NotMapped]
-        public string StatusPlatinaDescricao => EnumUtils.GetEnumDescription((ETipoStatusGame)IdStatusGame);
+        public string StatusPlatinaDescricao => EnumUtils.GetEnumDescription((EStatusGame)IdStatusGame);
 
     }
 }

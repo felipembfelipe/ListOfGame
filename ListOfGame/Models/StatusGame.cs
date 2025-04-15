@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ListOfGame.Models
 {
     [Table("TB_LG_STATUS_GAME")]
-    public class TipoStatusGame
+    public class StatusGame
     {
         [Key]
         [Required]
@@ -13,6 +13,6 @@ namespace ListOfGame.Models
         public int Id { get; set; }
 
         [Column("DS_STATUS_GAME")]
-        public string StatusGame { get; set; }
+        public string DescricaoStatusGame { get; set; }
     }
 }

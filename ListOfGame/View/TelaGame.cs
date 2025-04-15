@@ -11,23 +11,23 @@ namespace ListOfGame.View
 {
     public partial class frmTelaGame : Form
     {
-        private readonly IUsuarioServices _usuarioServices;
         private readonly IGameServices _gameServices;
 
         private string IdGame = null;
 
-        public frmTelaGame(IUsuarioServices usuarioServices, IGameServices gameServices)
+        public frmTelaGame(IGameServices gameServices)
         {
-            _usuarioServices = usuarioServices;
             _gameServices = gameServices;
             InitializeComponent();
         }
 
         private void btnSair_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
-            frmTelaPrincipal formTelaPrincipal = new frmTelaPrincipal(_usuarioServices, _gameServices);
-            formTelaPrincipal.ShowDialog();
+            if (MessageBox.Show("Deseja realmente sair do programa? ", "Mensagem do Sistema ",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace ListOfGame.View
                 GameConcluido = checkConcluido.Checked,
                 AnoConcluido = !String.IsNullOrEmpty(txtAno.Text) ? int.Parse(txtAno.Text) : (int?)null,
                 PossuiOnline = checkOnline.Checked,
-                IdStatusGame = (int)(ETipoStatusGame)comboBoxStatus.SelectedValue
+                IdStatusGame = (int)(EStatusGame)comboBoxStatus.SelectedValue
             };
 
             // Aqui você chama um método para inserir no banco
@@ -79,7 +79,7 @@ namespace ListOfGame.View
 
                 if (row.Cells["IdStatusGame"]?.Value != null)
                 {
-                    var status = (ETipoStatusGame)System.Enum.Parse(typeof(ETipoStatusGame), row.Cells["IdStatusGame"].Value.ToString());
+                    var status = (EStatusGame)System.Enum.Parse(typeof(EStatusGame), row.Cells["IdStatusGame"].Value.ToString());
                     SelecionarValorEnumNoComboBox(comboBoxStatus, status);
                 }
             }
@@ -211,7 +211,7 @@ namespace ListOfGame.View
                 new ComboBoxItem { Text = "Selecione o Status", Value = null }
             };
 
-            foreach (var status in System.Enum.GetValues(typeof(ETipoStatusGame)))
+            foreach (var status in System.Enum.GetValues(typeof(EStatusGame)))
             {
                 lista.Add(new ComboBoxItem { Text = status.ToString(), Value = status });
             }

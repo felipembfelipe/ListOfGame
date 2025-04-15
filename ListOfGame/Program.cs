@@ -21,7 +21,7 @@ namespace ListOfGame
             var container = UnityConfig.RegisterComponents();
 
             // Resolve a dependência de frmLogin com todas as dependências injetadas
-            var frmLogin = container.Resolve<frmLogin>();  // Aqui o Unity vai injetar ILoginServices automaticamente
+            var frmLogin = container.Resolve<frmTelaGame>();  // Aqui o Unity vai injetar ILoginServices automaticamente
 
             // Inicia o formulário com todas as dependências resolvidas
             Application.Run(frmLogin);
